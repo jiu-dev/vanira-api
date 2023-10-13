@@ -1,0 +1,41 @@
+{
+  "STATUS_CODE": {
+    "200": {
+      "OK": "Requête traitée avec succès."
+    },
+    "201": {
+      "CREATED": "Ressource créée avec succès."
+    },
+    "204": {
+      "NO_CONTENT": "Aucun contenu à retourner."
+    },
+    "400": {
+      "BAD_REQUEST": "Requête incorrecte. Veuillez vérifier vos données d'entrée."
+    },
+    "401": {
+      "UNAUTHORIZED": "Non autorisé. Veuillez fournir des identifiants valides.",
+      "INVALID_PASSWORD": "Le mot de passe que vous avez fourni est invalide. Veuillez vous assurer qu'il respecte les exigences du mot de passe."
+    },
+    "403": {
+      "FORBIDDEN": "Accès interdit. Vous n'avez pas la permission d'accéder à cette ressource."
+    },
+    "404": {
+      "NOT_FOUND": "Ressource non trouvée. La ressource demandée n'existe pas."
+    },
+    "405": {
+      "METHOD_NOT_ALLOWED": "Méthode non autorisée pour cette ressource."
+    },
+    "500": {
+      "INTERNAL_ERROR_SERVER": "Erreur interne du serveur. Veuillez réessayer ultérieurement."
+    },
+    "502": {
+      "BAD_GATEWAY": "Passerelle incorrecte. Le serveur a rencontré un problème avec un serveur externe."
+    },
+    "503": {
+      "SERVICE_UNAVAILABLE": "Service non disponible. Veuillez réessayer ultérieurement."
+    },
+    "504": {
+      "GATEWAY_TIMEOUT": "Délai de la passerelle dépassé. Le serveur a rencontré un délai d'attente lors de l'attente d'une réponse."
+    }
+  }
+}

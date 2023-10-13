@@ -1,0 +1,45 @@
+{
+	"STATUS_CODE": {
+		"200": {
+			"OK": "Request processed successfully"
+		},
+		"201": {
+			"CREATED": "Resource created successfully."
+		},
+		"204": {
+			"NO_CONTENT": "No content to return."
+		},
+		"400": {
+			"BAD_REQUEST": "Bad request. Please check your input."
+		},
+		"401": {
+			"UNAUTHORIZED": "Unauthorized. Please provide valid credentials.",
+			"INVALID_PASSWORD": "The password you provided is invalid. Please ensure it meets the password requirements."
+		},
+		"403": {
+			"FORBIDDEN": "Access forbidden. You do not have permission to access this resource."
+		},
+		"404": {
+			"NOT_FOUND": "Resource not found. The requested resource does not exist."
+		},
+		"405": {
+			"METHOD_NOT_ALLOWED": "Method not allowed for this resource."
+		},
+		"500": {
+			"INTERNAL_ERROR_SERVER": "Internal server error. Please try again later."
+		},
+		"502": {
+			"BAD_GATEWAY": "Bad gateway. The server encountered an issue with an external server."
+		},
+		"503": {
+			"SERVICE_UNAVAILABLE": "Service unavailable. Please try again later."
+		},
+		"504": {
+			"GATEWAY_TIMEOUT": "Gateway timeout. The server encountered a timeout while waiting for a response."
+		},
+		"data and salt arguments required": "STATUS_CODE.data and salt arguments required"
+	},
+	"404.NOT_FOUND": "404.NOT_FOUND",
+	"401.INVALID_PASSWORD": "401.INVALID_PASSWORD",
+	"STATUS_CODE.401.INVALID_PASSWORD": "STATUS_CODE.401.INVALID_PASSWORD"
+}

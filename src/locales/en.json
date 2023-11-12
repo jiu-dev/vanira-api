@@ -25,6 +25,9 @@
 		"405": {
 			"METHOD_NOT_ALLOWED": "Method not allowed for this resource."
 		},
+		"409": {
+			"CONFLICT": "The resource you are trying to create or modify conflicts with an existing resource. Please check your request data and try again."
+		},
 		"500": {
 			"INTERNAL_ERROR_SERVER": "Internal server error. Please try again later."
 		},
@@ -37,7 +40,17 @@
 		"504": {
 			"GATEWAY_TIMEOUT": "Gateway timeout. The server encountered a timeout while waiting for a response."
 		},
-		"data and salt arguments required": "STATUS_CODE.data and salt arguments required"
+		"data and salt arguments required": "STATUS_CODE.data and salt arguments required",
+		"ConflictError": " 409.CONFLICT",
+		"Failed to create user": " E11000 duplicate key error collection: vanira.users index: email_1 dup key: { email: \"jiudev@gmail.com\" }",
+		"$and/$or/$nor must be a nonempty array": "STATUS_CODE.$and/$or/$nor must be a nonempty array",
+		"Cannot read properties of undefined (reading 'find')": "STATUS_CODE.Cannot read properties of undefined (reading 'find')",
+		"Parameter \"filter\" to deleteMany() must be an object, got \"\" (type object)": "STATUS_CODE.Parameter \"filter\" to deleteMany() must be an object, got \"\" (type object)",
+		"Parameter \"filter\" to deleteMany() must be an object, got \"{\n  _id": " new ObjectId(\"654ce79f7f0b3a1a8ed3be88\"),\n  tag: 'Couleur',\n  name: 'Rouge',\n  description: '',\n  __v: 0\n}\" (type object)",
+		"Transaction numbers are only allowed on a replica set member or mongos": "STATUS_CODE.Transaction numbers are only allowed on a replica set member or mongos",
+		"Cannot read properties of null (reading 'name')": "STATUS_CODE.Cannot read properties of null (reading 'name')",
+		"Cast to ObjectId failed for value \"654d77e9695ee6961cc1d91\" (type string) at path \"_id\" for model \"ProductBlueprint\"": "STATUS_CODE.Cast to ObjectId failed for value \"654d77e9695ee6961cc1d91\" (type string) at path \"_id\" for model \"ProductBlueprint\"",
+		"Cast to ObjectId failed for value \"654d77e9695ee6961c1d391\" (type string) at path \"_id\" for model \"ProductBlueprint\"": "STATUS_CODE.Cast to ObjectId failed for value \"654d77e9695ee6961c1d391\" (type string) at path \"_id\" for model \"ProductBlueprint\""
 	},
 	"404.NOT_FOUND": "404.NOT_FOUND",
 	"401.INVALID_PASSWORD": "401.INVALID_PASSWORD",

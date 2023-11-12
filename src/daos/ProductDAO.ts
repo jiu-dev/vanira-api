@@ -1,25 +1,32 @@
-import { injectable } from "tsyringe";
-import ProductModel, { Product } from "../models/ProductModel";
+import { inject, injectable } from "tsyringe";
+import ProductModel, { ProductDocument } from "../models/ProductModel";
+import PropertyDAO from "./PropertyDAO";
+import { Model } from "mongoose";
+import { ProductCreateDTO } from "../dtos/ProductCreateDTO";
 
 @injectable()
 export default class ProductDAO {
-  async getProducts(): Promise<Product[]> {
+  constructor(
+    @inject("ProductModel")
+    private readonly productModel: Model<ProductDocument>,
+    @inject("PropertyDAO")
+    private propertyDAO: PropertyDAO
+  ) {}
+
+  async createProduct(inputData: ProductCreateDTO): Promise<string> {
     try {
-      const products = await ProductModel.find()
-        .populate({
-          path: "productProperties",
-        })
-        .populate({ path: "mainProperty" });
-      return products;
-    } catch (error: any) {
-      throw new Error(`Failed to get product: ${error.message}`);
-    }
-  }
-  async createProduct(productData: Product): Promise<Product> {
-    try {
-      const newProduct = new ProductModel(productData);
-      console.log(newProduct);
-      return await newProduct.save();
+      const result = await this.propertyDAO.createProductProperties(
+        inputData.mainProperty,
+        inputData.properties
+      );
+
+      const createdProduct = await this.productModel.create({
+        mainProperty: result.mainProperty,
+        properties: result.properties,
+        price: inputData.price,
+      });
+
+      return createdProduct._id;
     } catch (error) {
       console.log(error);
       throw error;
@@ -28,14 +35,5 @@ export default class ProductDAO {
 
   async deleteProduct(productId: string): Promise<void> {
     await ProductModel.findByIdAndDelete(productId);
-  }
-
-  async updateProduct(
-    productId: string,
-    productData: Partial<Product>
-  ): Promise<Product | null> {
-    return await ProductModel.findByIdAndUpdate(productId, productData, {
-      new: true,
-    });
   }
 }

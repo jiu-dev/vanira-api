@@ -1,10 +1,16 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { AuthenticationError } from "../errors/AuthenticationError";
 import { NotFoundError } from "../errors/NotFoundError";
 import { AuthorizationError } from "../errors/AuthorizationError";
 import { BadRequestError } from "../errors/BadRequestError";
+import { ConflictError } from "../errors/ConflictError";
 
-export const errorHandler = (error: Error, req: Request, res: Response) => {
+export const errorHandler = (
+  error: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   let status;
 
   switch (true) {
@@ -20,12 +26,14 @@ export const errorHandler = (error: Error, req: Request, res: Response) => {
     case error instanceof AuthorizationError:
       status = 403;
       break;
+    case error instanceof ConflictError:
+      status = 409;
+      break;
+
     default: // Default status code for other errors
       status = 500;
   }
-  console.log(error.message);
 
-  return res
-    .status(status)
-    .json({ error: res.__("STATUS_CODE." + error.message) });
+  res.status(status).json({ error: res.__("STATUS_CODE." + error.message) });
+  next();
 };

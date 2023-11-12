@@ -1,17 +1,21 @@
 import express from "express";
 import "reflect-metadata";
-import connectToDatabase from "./database";
 import {
   authController,
+  productBlueprintController,
   productController,
-  propertyController,
   userController,
-} from "./container";
+} from "./config/container";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { errorHandler } from "./middleware/errorHandler";
 import i18n from "i18n";
 import path from "path";
+import dotenv from "dotenv";
+import connectToDatabase from "./config/database";
+import { errorHandler } from "./middleware/errorHandler";
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
 
 const app = express();
 connectToDatabase();
@@ -33,7 +37,7 @@ app.use(express.json());
 app.use("/api/users", userController.getRouter());
 app.use("/api/auth", authController.getRouter());
 app.use("/api/products", productController.getRouter());
-app.use("/api/properties", propertyController.getRouter());
+app.use("/api/productBlueprints", productBlueprintController.getRouter());
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 8080;

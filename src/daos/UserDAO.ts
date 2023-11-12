@@ -7,6 +7,8 @@ export default class UserRepository {
   async createUser(user: UserSignUpDTO): Promise<IUser> {
     try {
       const newUser = new UserModel(user);
+      console.log("DAO : ");
+      console.log(newUser);
       return await newUser.save();
     } catch (error: any) {
       throw new Error(`Failed to create user: ${error.message}`);

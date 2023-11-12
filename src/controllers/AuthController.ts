@@ -10,7 +10,6 @@ import {
 @injectable()
 export default class AuthController {
   private router = Router();
-
   constructor(@inject("AuthService") private authService: AuthService) {
     this.initializeRoutes();
   }
@@ -40,6 +39,7 @@ export default class AuthController {
     next: NextFunction
   ) => {
     try {
+      console.log(req.body);
       await this.authService.register(req.body);
       res.status(201).json({ message: "User registered successfully" });
     } catch (e: any) {

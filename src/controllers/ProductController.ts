@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 import ProductService from "../services/ProductService";
 import { inject, injectable } from "tsyringe";
-import { Product } from "../models/ProductModel";
-import { CreateProductDTO } from "../dtos/CreateProductDTO";
+import { validate } from "class-validator";
+import { ProductCreateDTO } from "../dtos/ProductCreateDTO";
 
 @injectable()
 export default class ProductController {
@@ -19,62 +19,22 @@ export default class ProductController {
   }
 
   private initializeRoutes() {
-    this.router.get("/", this.getProducts);
     this.router.post("/", this.createProduct);
-    this.router.put("/:productId", this.updateProduct);
-    this.router.delete("/:productId", this.deleteProduct);
   }
-
-  private getProducts = async (req: Request, res: Response) => {
-    try {
-      const products = await this.productService.getProducts();
-      res.status(200).json(products);
-    } catch (error) {
-      res.status(500).json({ error: "500.INTERNAL_ERROR_SERVER" });
-    }
-  };
 
   private createProduct = async (req: Request, res: Response) => {
     try {
-      const productData: CreateProductDTO = req.body;
+      const inputData: ProductCreateDTO = req.body;
+
+      const errors = await validate(inputData);
+      if (errors.length > 0) {
+        return res.status(400).json({ errors });
+      }
+
       const createdProductId = await this.productService.createProduct(
-        productData
+        inputData
       );
       res.status(201).json(createdProductId);
-    } catch (error) {
-      res.status(500).json({ error: "500.INTERNAL_ERROR_SERVER" });
-    }
-  };
-
-  private deleteProduct = async (
-    req: Request,
-    res: Response
-  ): Promise<void> => {
-    try {
-      const productId = req.params.productId;
-      await this.productService.deleteProduct(productId);
-      res.status(204).send();
-    } catch (error) {
-      res.status(500).json({ error: "500.INTERNAL_ERROR_SERVER" });
-    }
-  };
-
-  private updateProduct = async (
-    req: Request,
-    res: Response
-  ): Promise<void> => {
-    try {
-      const productId = req.params.productId;
-      const productData: Partial<Product> = req.body;
-      const updatedProduct = await this.productService.updateProduct(
-        productId,
-        productData
-      );
-      if (updatedProduct) {
-        res.status(200).json(updatedProduct);
-      } else {
-        res.status(404).json({ error: "NOT_FOUND" });
-      }
     } catch (error) {
       res.status(500).json({ error: "500.INTERNAL_ERROR_SERVER" });
     }

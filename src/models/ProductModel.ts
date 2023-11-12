@@ -1,28 +1,22 @@
-import mongoose, { Schema, Document, Types } from "mongoose";
-import { Property } from "./PropertyModel";
+import mongoose, { Schema, Document } from "mongoose";
+import { ProductCreateDTO } from "../dtos/ProductCreateDTO";
 
-export interface Product extends Document {
-  mainProperty: Property;
-  productProperties: Types.Array<Property["_id"]> | Property[];
-  quantity: number;
-}
+export interface ProductDocument extends Document, ProductCreateDTO {}
 
 const ProductSchema: Schema = new Schema({
+  price: Number,
   mainProperty: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Property",
-    price: Number,
   },
   productProperties: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Property",
-      price: Number,
     },
   ],
-  quantity: { type: Number, required: true },
 });
 
-const ProductModel = mongoose.model<Product>("Product", ProductSchema);
+const ProductModel = mongoose.model<ProductDocument>("Product", ProductSchema);
 
 export default ProductModel;

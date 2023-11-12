@@ -25,6 +25,9 @@
     "405": {
       "METHOD_NOT_ALLOWED": "Méthode non autorisée pour cette ressource."
     },
+    "409": {
+      "CONFLICT": "La ressource que vous essayez de créer ou de modifier entre en conflit avec une ressource existante. Veuillez vérifier les données de votre requête et réessayer."
+    },
     "500": {
       "INTERNAL_ERROR_SERVER": "Erreur interne du serveur. Veuillez réessayer ultérieurement."
     },
